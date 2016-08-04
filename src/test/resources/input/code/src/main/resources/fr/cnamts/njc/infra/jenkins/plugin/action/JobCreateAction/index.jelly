@@ -1,0 +1,35 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" 
+xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+ <j:set var="instance" value="${it}"/>
+  <j:set var="descriptor" value="${instance.descriptor}"/>
+    <l:layout>
+            
+         <l:main-panel>
+          <h1>Creation de job en cascade</h1>
+          <h2>Avec recherche des dependances UL</h2>
+           <f:form name="create" action="create" method="post">
+              <f:section title="Lancement">
+              <f:entry title="Label du projet de depart" field="label">
+              <f:textbox name="label" field="label" value="${it.label}"/>
+          </f:entry>
+             </f:section>
+              <f:block>
+              <input type="submit" value="Valider"/>
+            </f:block>
+        </f:form>
+      <j:if test="${it.createdJobsAvailable}">
+      <HR/>
+      <table cellpadding="3" cellspacing="3">
+        <j:forEach var="job" items="${it.createdJobs}">
+        <tr>
+                                       <td>${job}</td>
+        </tr>
+          </j:forEach>
+          </table>
+      </j:if>
+        </l:main-panel>
+      
+    </l:layout>
+</j:jelly>
+ 
+
